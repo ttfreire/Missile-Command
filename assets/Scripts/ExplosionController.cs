@@ -5,11 +5,17 @@ public class ExplosionController : MonoBehaviour {
 	public float lifeSpan;
 	GameObject player;
 	AudioSource explosionSource;
+	GameObject score;
+	GameObject game;
+	int pointsPerKill;
 
 	void Start () {
 		explosionSource = audio;
 		player = GameObject.FindGameObjectWithTag ("Player");
 		AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
+		game = GameObject.Find ("Game");
+		pointsPerKill = game.GetComponent<GameController> ().pointsPerKill;
+		score = GameObject.Find ("Score");
 	}
 	
 	// Update is called once per frame
@@ -20,7 +26,9 @@ public class ExplosionController : MonoBehaviour {
 		}
 	}
 
-	void onTriggerEnter(Collision other){
+	void OnTriggerEnter(Collider other) {
+		if(other.tag ==  "Enemy")
+			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
 		Destroy (other.gameObject);
 	}
 }

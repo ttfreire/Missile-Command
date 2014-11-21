@@ -19,7 +19,6 @@ public class MissileController : MonoBehaviour {
 		lifeSpan -= Time.fixedDeltaTime;
 		if ( lifeSpan < 0 ){
 			createExplosion(explosion);
-			Destroy(this.gameObject);
 		}
 	}
 
@@ -27,11 +26,6 @@ public class MissileController : MonoBehaviour {
 				
 		if (c.gameObject.tag == "Enemy") {
 			createExplosion(explosion);
-			Destroy(this.gameObject);
-		}
-
-		if (c.gameObject.name == "Explosion(Clone)") {
-			//Destroy(this.gameObject);
 		}
 	}
 

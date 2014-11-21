@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 	public int gameState;
 	GameObject player;
 	AudioSource themeSource;
+	public int pointsPerKill;
 
 	void Start () {
 		gameState = 0;

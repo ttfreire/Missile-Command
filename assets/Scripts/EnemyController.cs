@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
 	GameObject player;
 	GameObject score;
 
-	void Start () {
+	void Start () { 
 		//this.gameObject.renderer.material.color = Color.red;
 		explosionSource = audio;
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -28,16 +28,6 @@ public class EnemyController : MonoBehaviour {
 		}
 
 		if (c.gameObject.name == "Plane") {
-			Destroy(this.gameObject);
-		}
-
-		if (c.gameObject.name == "Explosion(Clone)") {
-			score.guiText.text = (int.Parse(score.guiText.text) + 100).ToString();
-			//Destroy(this.gameObject);
-		}
-
-		if (c.gameObject.tag == "Missile") {
-			score.guiText.text = (int.Parse(score.guiText.text) + 100).ToString();
 			Destroy(this.gameObject);
 		}
 	}
