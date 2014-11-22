@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum states {TITLE, PLAYING, GAMEOVER};
 public class GameController : MonoBehaviour {
 	GameObject[] cityObjects;
 	private float nextActionTime = 0f; 
 	public float periodOver = 10f;
 	public float periodGame = 3f;
 	// Use this for initialization
-	public int gameState;
 	GameObject player;
 	AudioSource themeSource;
 	public int pointsPerKill;
+	public states gameState = states.TITLE;
 
 	void Start () {
 		gameState = 0;
@@ -24,20 +25,24 @@ public class GameController : MonoBehaviour {
 		cityObjects = GameObject.FindGameObjectsWithTag("City");
 
 		switch (gameState) {
-			case 0:
+			case states.TITLE:
+				
+				break;
+
+			case states.PLAYING:
 				if (cityObjects.Length == 0) {
 					nextActionTime += Time.deltaTime;
 					if (nextActionTime > periodGame) { 
-						gameState = 1;
-					nextActionTime = 0f;
+						gameState = states.GAMEOVER;
+						nextActionTime = 0f;
 						Application.LoadLevel("gameOver");
 					}
 				}
 				break;
 
-			case 1:
+			case states.GAMEOVER:
 				if (nextActionTime > periodOver) { 
-					gameState = 0;
+				gameState = states.PLAYING;
 					Application.LoadLevel ("gameScene");
 				}
 				nextActionTime += Time.deltaTime;

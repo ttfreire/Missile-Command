@@ -7,10 +7,10 @@ public class EnemySpawner : MonoBehaviour {
 	public float period = 100f;
 	GameObject[] cityObjects;
 	GameObject city;
-	bool canSpawn = true;
+	bool canSpawn = false;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame

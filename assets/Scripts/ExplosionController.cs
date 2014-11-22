@@ -29,6 +29,7 @@ public class ExplosionController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag ==  "Enemy")
 			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
-		Destroy (other.gameObject);
+		if(other.tag !=  "Floor")
+			Destroy (other.gameObject);
 	}
 }
