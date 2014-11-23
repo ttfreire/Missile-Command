@@ -22,7 +22,7 @@ public class ExplosionController : MonoBehaviour {
 	void Update () {
 		lifeSpan -= Time.deltaTime;
 		if ( lifeSpan < 0 ){
-			Destroy (gameObject);
+			Network.Destroy (gameObject);
 		}
 	}
 
@@ -30,6 +30,6 @@ public class ExplosionController : MonoBehaviour {
 		if(other.tag ==  "Enemy")
 			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
 		if(other.tag !=  "Floor")
-			Destroy (other.gameObject);
+			Network.Destroy (other.gameObject);
 	}
 }

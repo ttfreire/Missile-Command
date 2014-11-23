@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 	private float nextActionTime = 0f; 
 	public float periodOver;
 	public float periodGame;
-
+	public int numPlayers = 0;
 	// gameObjects
 	GameObject player;
 	EnemySpawner enemySpawner;
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		cityObjects = GameObject.FindGameObjectsWithTag("City");
 		UpdateGameState ();
+		Debug.Log ("numplayers: "+numPlayers);
 	}
 
 	public void EnterGameState(GameState newGameState){
@@ -84,7 +85,7 @@ public class GameController : MonoBehaviour {
 				break;	
 				
 			case GameState.PLAYING:
-				EnableMouseControl();
+				EnablePlayerControl();
 				
 				if (cityObjects.Length == 0) {
 					nextActionTime += Time.deltaTime;
@@ -103,7 +104,6 @@ public class GameController : MonoBehaviour {
 					EnterGameState(GameState.LOBBY);
 				}
 				nextActionTime += Time.deltaTime;
-			Debug.Log (nextActionTime);
 				break;
 			}
 	}
@@ -130,11 +130,28 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-	public void EnableMouseControl(){
+	public void EnablePlayerControl(){
 		MouseLook mousecontrol;
+		TurretController turretcontrol;
 		mousecontrol = player.GetComponent<MouseLook>();
 		mousecontrol.enabled = true;
 		mousecontrol = camera.GetComponent<MouseLook>();
 		mousecontrol.enabled = true;
+		turretcontrol = player.GetComponent<TurretController>();
+		turretcontrol.enabled = true;
 	}
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+		
+		if (stream.isWriting) {
+			
+			stream.Serialize (ref numPlayers);
+		}
+		else {
+			
+			stream.Serialize (ref numPlayers);
+		}
+		
+	}
+
 }

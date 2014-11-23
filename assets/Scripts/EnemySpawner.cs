@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour {
 	GameObject[] cityObjects;
 	GameObject city;
 	public bool canSpawn;
+	Rigidbody enemy;
 	// Use this for initialization
 	void Start () {
 
@@ -15,17 +16,19 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > nextActionTime && canSpawn ) { 
-			nextActionTime += period;
-			cityObjects = GameObject.FindGameObjectsWithTag("City");
-			if (cityObjects.Length == 0)
-				canSpawn = false;
-			else{
-				city = cityObjects [Random.Range (0, cityObjects.Length)];
-				transform.LookAt (city.transform.position);
-				Rigidbody enemy = (Rigidbody) Instantiate(enemyRocket, transform.position, transform.rotation);
+		if(Network.isServer)
+			if (Time.time > nextActionTime && canSpawn ) { 
+				nextActionTime += period;
+				cityObjects = GameObject.FindGameObjectsWithTag("City");
+				if (cityObjects.Length == 0)
+					canSpawn = false;
+				else{
+					city = cityObjects [Random.Range (0, cityObjects.Length)];
+					transform.LookAt (city.transform.position);
+					enemy = (Rigidbody) Network.Instantiate(enemyRocket, transform.position, transform.rotation,0);
+				}
 			}
-		}
 
 	}
+	
 }

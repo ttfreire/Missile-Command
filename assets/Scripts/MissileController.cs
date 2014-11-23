@@ -30,7 +30,7 @@ public class MissileController : MonoBehaviour {
 	}
 
 	void createExplosion(Rigidbody explosion){
-		Rigidbody explosionObject = (Rigidbody) Instantiate(explosion, transform.position, Quaternion.identity);
+		Rigidbody explosionObject = (Rigidbody) Network.Instantiate(explosion, transform.position, Quaternion.identity,0);
 		explosionObject.GetComponent<ExplosionController>().lifeSpan = explosionObject.particleSystem.duration - 1.5f*rigidbody.velocity.x;
 		
 	}

@@ -98,7 +98,7 @@ public class chat : MonoBehaviour {
 	//Server public void
 	public void OnPlayerConnected(NetworkPlayer player) {
 		addGameChatMessage("Player connected from: " + player.ipAddress +":" + player.port);
-		networkView.RPC ("SendMsgToClient", player);
+		networkView.RPC ("SendMsgToClient", player, "");
 	}
 	
 	[RPC]

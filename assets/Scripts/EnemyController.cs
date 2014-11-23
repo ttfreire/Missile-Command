@@ -24,11 +24,13 @@ public class EnemyController : MonoBehaviour {
 			Rigidbody explosionObject = (Rigidbody) Instantiate(destruction, transform.position, Quaternion.identity);
 			AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
 			Destroy(c.gameObject);
-			Destroy (this.gameObject);
+			Network.Destroy (this.gameObject);
 		}
 
 		if (c.gameObject.name == "Plane") {
-			Destroy(this.gameObject);
+			Network.Destroy(this.gameObject);
 		}
 	}
+
+
 }

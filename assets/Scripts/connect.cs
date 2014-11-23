@@ -78,6 +78,8 @@ public class connect : MonoBehaviour {
 
 	public void OnConnectedToServer() {
 		Debug.Log("This CLIENT has connected to a server");	
+		if(Network.isServer)
+			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers++;
 	}
 	
 	public void OnDisconnectedFromServer(NetworkDisconnection info) {
@@ -91,7 +93,8 @@ public class connect : MonoBehaviour {
 	
 	//Server public voids called by Unity
 	public void OnPlayerConnected(NetworkPlayer player) {
-
+		if(Network.isServer)
+			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers++;
 
 		Debug.Log("Player connected from: " + player.ipAddress +":" + player.port);
 	}
@@ -101,6 +104,8 @@ public class connect : MonoBehaviour {
 	}
 	
 	public void OnPlayerDisconnected(NetworkPlayer player) {
+		if(Network.isServer)
+			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers--;
 		Debug.Log("Player disconnected from: " + player.ipAddress+":" + player.port);
 	}
 	

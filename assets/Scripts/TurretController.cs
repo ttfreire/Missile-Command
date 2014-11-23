@@ -54,7 +54,7 @@ public class TurretController : MonoBehaviour {
 
 	void FireRocket (float lifespan)
 	{
-		Rigidbody rocketClone = (Rigidbody) Instantiate(rocket, aimObject.transform.position, transform.rotation);
+		Rigidbody rocketClone = (Rigidbody) Network.Instantiate(rocket, aimObject.transform.position, transform.rotation,0);
 		rocketClone.GetComponent<MissileController>().lifeSpan = lifespan;
 		rocketClone.velocity = myCamera.transform.forward * force/10;
 		missileSource.PlayOneShot(missileSource.clip);
@@ -64,6 +64,7 @@ public class TurretController : MonoBehaviour {
 	}
 	
 	void OnGUI(){
+
 		GUI.DrawTexture(new Rect(Screen.width / 2 + force*4-256, Screen.height / 2 +force*4 - 256, 512-8*force, 512-8*force), aim );
 	}
 
