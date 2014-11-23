@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	public float period = 100f;
 	GameObject[] cityObjects;
 	GameObject city;
-	bool canSpawn = false;
+	public bool canSpawn;
 	// Use this for initialization
 	void Start () {
 
