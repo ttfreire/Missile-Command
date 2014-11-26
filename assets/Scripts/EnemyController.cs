@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
 	AudioSource explosionSource;
 	GameObject player;
 	GameObject score;
+	public GameObject floor;
 
 	void Start () { 
 		//this.gameObject.renderer.material.color = Color.red;
@@ -27,7 +28,7 @@ public class EnemyController : MonoBehaviour {
 			Network.Destroy (this.gameObject);
 		}
 
-		if (c.gameObject.name == "Plane") {
+		if (c.gameObject.name == "Floor") {
 			Network.Destroy(this.gameObject);
 		}
 	}

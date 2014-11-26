@@ -2,6 +2,7 @@
 using System.Collections;
 
 public enum GameState {NONE, LOBBY, MATCHMAKING, PLAYING, SPECTATING, GAMEOVER};
+
 public class GameController : MonoBehaviour {
 	GameObject[] cityObjects;
 	private float nextActionTime = 0f; 
@@ -45,12 +46,13 @@ public class GameController : MonoBehaviour {
 				break;
 			
 			case GameState.MATCHMAKING:
-				GameObject.Find("Creating Match Label").GetComponent<GUIText>().enabled = true;
-				break;	
+			GameObject.Find("Player1").GetComponent<Player>().enabled = true;
+			GameObject.Find("Player2").GetComponent<Player>().enabled = true;
+			break;	
 			
 			case GameState.PLAYING:
-				
-				// Enabling UI elements
+				GameObject.Find("MinimapCamera").GetComponent<Camera>().enabled = true;
+			// Enabling UI elements
 				GameObject.Find("MinimapCamera").GetComponent<Camera>().enabled = true;
 				GameObject[] uiElements = GameObject.FindGameObjectsWithTag("UI");
 				foreach(GameObject element in uiElements)
@@ -86,7 +88,7 @@ public class GameController : MonoBehaviour {
 				
 			case GameState.PLAYING:
 				EnablePlayerControl();
-				
+			
 				if (cityObjects.Length == 0) {
 					nextActionTime += Time.deltaTime;
 					if (nextActionTime > periodGame) { 
