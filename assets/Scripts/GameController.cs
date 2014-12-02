@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum GameState {NONE, LOBBY, MATCHMAKING, PLAYING, SPECTATING, GAMEOVER};
 
@@ -9,22 +10,31 @@ public class GameController : MonoBehaviour {
 	public float periodOver;
 	public float periodGame;
 	public int numPlayers = 0;
-	// gameObjects
-	GameObject player;
+
 	EnemySpawner enemySpawner;
+	GameObject player;
 	GameObject camera;
 	GameObject background;
-
+	public List<GameObject> playersList;
+	public GameObject turret;
 
 	AudioSource themeSource;
 	public int pointsPerKill;
 	public GameState current_gameState = GameState.NONE;
 
+	PlayerNode newEntry;
+
+	public List<PlayerNode> playerList = new List<PlayerNode>();
+	public class PlayerNode {
+		public GameObject playerSpawn;
+		public NetworkPlayer networkPlayer;
+	}
 
 	void Start () {
-		EnterGameState(GameState.LOBBY);
 		themeSource = audio;
 		DontDestroyOnLoad (this);
+		playersList = new List<GameObject>();
+		EnterGameState(GameState.LOBBY);
 	}
 	
 	// Update is called once per frame
@@ -43,15 +53,39 @@ public class GameController : MonoBehaviour {
 		switch (current_gameState) {
 			case GameState.LOBBY:
 				Application.LoadLevel ("gameScene");
+				
+	
 				break;
 			
 			case GameState.MATCHMAKING:
-			GameObject.Find("Player1").GetComponent<Player>().enabled = true;
-			GameObject.Find("Player2").GetComponent<Player>().enabled = true;
+			{
+				if(Network.isServer)
+			{
+				playersList.Add(GameObject.Find("Player1"));
+				playersList.Add(GameObject.Find("Player2"));
+				Debug.Log("Added players gameobjects to list");
+			}
+			}
+			
+
+			//networkView.RPC("selectPlayer", RPCMode.Server, Network.player);
+			//if(Network.isServer)
+			//	networkView.RPC("informPlayerToClient", Network.player, player );
 			break;	
 			
 			case GameState.PLAYING:
-				GameObject.Find("MinimapCamera").GetComponent<Camera>().enabled = true;
+
+			if (Network.isServer) 
+				for(int i = 0; i< playerList.Count;i++)
+				{
+					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
+					Debug.Log("Informed Player: "+playerList[i].networkPlayer);
+					playersList.RemoveAt(0);
+					
+				}
+	
+			if(!Network.isServer)
+			{
 			// Enabling UI elements
 				GameObject.Find("MinimapCamera").GetComponent<Camera>().enabled = true;
 				GameObject[] uiElements = GameObject.FindGameObjectsWithTag("UI");
@@ -59,11 +93,12 @@ public class GameController : MonoBehaviour {
 				{
 					element.GetComponent<GUIText>().enabled = true;
 				}
-				player = GameObject.FindGameObjectWithTag ("Player");
 				camera = GameObject.FindGameObjectWithTag ("MainCamera");
 				enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
 				enemySpawner.canSpawn = true;
 				AudioSource.PlayClipAtPoint(themeSource.clip,player.transform.position);
+			}
+
 				break;
 				
 			case GameState.GAMEOVER:
@@ -77,16 +112,18 @@ public class GameController : MonoBehaviour {
 		
 		switch (current_gameState) {
 			case GameState.LOBBY:
-				if(Input.GetKeyUp(KeyCode.Space))
+			if(Input.GetKeyUp(KeyCode.Space))
 					EnterGameState(GameState.MATCHMAKING);
 				break;
 				
 			case GameState.MATCHMAKING:
-				if(Input.GetKeyUp(KeyCode.Space))
+			if(Input.GetKeyUp(KeyCode.Space))
 					EnterGameState(GameState.PLAYING);
 				break;	
 				
 			case GameState.PLAYING:
+			if(!Network.isServer && networkView.isMine)
+			{
 				EnablePlayerControl();
 			
 				if (cityObjects.Length == 0) {
@@ -95,8 +132,10 @@ public class GameController : MonoBehaviour {
 						EnterGameState(GameState.GAMEOVER);
 					}
 				}
+			}
 
-				if(Input.GetKeyUp(KeyCode.Space))
+
+			if(Input.GetKeyUp(KeyCode.Space))
 					EnterGameState(GameState.GAMEOVER);
 				break;
 				
@@ -133,27 +172,47 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void EnablePlayerControl(){
-		MouseLook mousecontrol;
 		TurretController turretcontrol;
-		mousecontrol = player.GetComponent<MouseLook>();
-		mousecontrol.enabled = true;
-		mousecontrol = camera.GetComponent<MouseLook>();
-		mousecontrol.enabled = true;
-		turretcontrol = player.GetComponent<TurretController>();
+		turretcontrol = player.GetComponent<Player>().turret.GetComponent<TurretController>();
 		turretcontrol.enabled = true;
 	}
 
+
+		
+	[RPC]
+	void informPlayerToClient(NetworkViewID the_player){
+		player = NetworkView.Find(the_player).gameObject;
+		Network.Instantiate (turret, player.transform.position, player.transform.rotation, 0); 
+		Debug.Log ("Criei um player: "+ the_player);
+		}
+
+	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
 		
 		if (stream.isWriting) {
 			
 			stream.Serialize (ref numPlayers);
+
 		}
 		else {
 			
 			stream.Serialize (ref numPlayers);
 		}
 		
+	}
+
+	public void OnPlayerConnected(NetworkPlayer player) {
+			numPlayers++;
+			PlayerNode newEntry = new PlayerNode ();
+			newEntry.playerSpawn = null;
+			newEntry.networkPlayer = player;
+			playerList.Add (newEntry);
+			Debug.Log ("Player " + numPlayers + " added");
+			Debug.Log ("Player NetworkPlayer: "+newEntry.networkPlayer);
+	}
+
+	public void OnNetworkInstantiate (NetworkMessageInfo info) {
+		Debug.Log("New object instantiated by " + info.sender);
 	}
 
 }

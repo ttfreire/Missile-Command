@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public int health;
 
 	void Start(){
-		Network.Instantiate (turret, transform.position, transform.rotation, 0);
+
+			Network.Instantiate (turret, transform.position, transform.rotation, 0); 
 	}
 }

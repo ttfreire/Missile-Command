@@ -11,25 +11,28 @@ public class ExplosionController : MonoBehaviour {
 
 	void Start () {
 		explosionSource = audio;
-		player = GameObject.FindGameObjectWithTag ("Player");
-		AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
+		//player = this.turret;
+		//AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
 		game = GameObject.Find ("Game");
-		pointsPerKill = game.GetComponent<GameController> ().pointsPerKill;
+		//pointsPerKill = game.GetComponent<GameController> ().pointsPerKill;
+		pointsPerKill = 100;
 		score = GameObject.Find ("Score");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		lifeSpan -= Time.deltaTime;
-		if ( lifeSpan < 0 ){
-			Network.Destroy (gameObject);
-		}
+		if (networkView.isMine) {
+						lifeSpan -= Time.deltaTime;
+						if (lifeSpan < 0) {
+								Network.Destroy (gameObject);
+						}
+				}
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if(other.tag ==  "Enemy")
+		if(other.tag ==  "Enemy"&& networkView.isMine)
 			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
-		if(other.tag !=  "Floor")
+		if(other.tag !=  "Floor"&& networkView.isMine)
 			Network.Destroy (other.gameObject);
 	}
 }
