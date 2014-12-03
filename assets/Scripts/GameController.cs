@@ -94,6 +94,8 @@ public class GameController : MonoBehaviour {
 					element.GetComponent<GUIText>().enabled = true;
 				}
 				camera = GameObject.FindGameObjectWithTag ("MainCamera");
+				if(!networkView.isMine)
+					camera.GetComponentInChildren<AudioListener>().enabled=false;
 				enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
 				enemySpawner.canSpawn = true;
 				AudioSource.PlayClipAtPoint(themeSource.clip,player.transform.position);
