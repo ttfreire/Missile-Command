@@ -77,32 +77,32 @@ public class connect : MonoBehaviour {
 	}
 
 	public void OnConnectedToServer() {
-		Debug.Log("This CLIENT has connected to a server");	
+			
 	}
 	
 	public void OnDisconnectedFromServer(NetworkDisconnection info) {
-		Debug.Log("This SERVER OR CLIENT has disconnected from a server");
+		
 	}
 	
 	public void OnFailedToConnect( NetworkConnectionError error){
-		Debug.Log("Could not connect to server: "+ error);
+		
 	}
 	
 	
 	//Server public voids called by Unity
 	public void OnPlayerConnected(NetworkPlayer player) {
 
-		Debug.Log("Player connected from: " + player.ipAddress +":" + player.port);
+		
 	}
 	
 	public void OnServerInitialized() {
-		Debug.Log("Server initialized and ready");
+		
 	}
 	
 	public void OnPlayerDisconnected(NetworkPlayer player) {
 		if(Network.isServer)
 			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers--;
-		Debug.Log("Player disconnected from: " + player.ipAddress+":" + player.port);
+		
 	}
 	
 	
@@ -111,10 +111,10 @@ public class connect : MonoBehaviour {
 	// the next four have been added here too, but they can be ignored for now
 	
 	public void OnFailedToConnectToMasterServer(NetworkConnectionError info){
-		Debug.Log("Could not connect to master server: "+ info);
+		
 	}
 	
 	public void OnNetworkInstantiate (NetworkMessageInfo info) {
-		Debug.Log("New object instantiated by " + info.sender);
+		
 	}
 }

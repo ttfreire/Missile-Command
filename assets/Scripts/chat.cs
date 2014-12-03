@@ -78,7 +78,7 @@ public class chat : MonoBehaviour {
 				return entry;
 			}
 		}
-		Debug.LogError("GetPlayerNode: Requested a playernode of non-existing player!");
+		
 		return null;
 	}
 	

@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		cityObjects = GameObject.FindGameObjectsWithTag("City");
 		UpdateGameState ();
-		Debug.Log ("numplayers: "+numPlayers);
+		
 	}
 
 	public void EnterGameState(GameState newGameState){
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
 			{
 				playersList.Add(GameObject.Find("Player1"));
 				playersList.Add(GameObject.Find("Player2"));
-				Debug.Log("Added players gameobjects to list");
+				
 			}
 			}
 			
@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour {
 				for(int i = 0; i< playerList.Count;i++)
 				{
 					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
-					Debug.Log("Informed Player: "+playerList[i].networkPlayer);
+					
 					playersList.RemoveAt(0);
 					
 				}
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 	void informPlayerToClient(NetworkViewID the_player){
 		player = NetworkView.Find(the_player).gameObject;
 		Network.Instantiate (turret, player.transform.position, player.transform.rotation, 0); 
-		Debug.Log ("Criei um player: "+ the_player);
+		
 		}
 
 	
@@ -207,12 +207,12 @@ public class GameController : MonoBehaviour {
 			newEntry.playerSpawn = null;
 			newEntry.networkPlayer = player;
 			playerList.Add (newEntry);
-			Debug.Log ("Player " + numPlayers + " added");
-			Debug.Log ("Player NetworkPlayer: "+newEntry.networkPlayer);
+			
+			
 	}
 
 	public void OnNetworkInstantiate (NetworkMessageInfo info) {
-		Debug.Log("New object instantiated by " + info.sender);
+		
 	}
 
 }
