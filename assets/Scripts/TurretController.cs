@@ -41,7 +41,7 @@ public class TurretController : MonoBehaviour {
 						myCamera.fieldOfView = (float)(480 / force);
 						if (Input.GetMouseButton (0)) {
 								lineRend.enabled = true;
-								force += 0.2f * Time.fixedDeltaTime;
+								force += 0.2f;
 								force = Mathf.Clamp (force, 0, maxForce);
 								Vector3 linePosInicial = new Vector3 (transform.position.x, 30, transform.position.z);
 								Vector3 linePosFinal = new Vector3 (transform.position.x + transform.forward.x * force * speed * Time.fixedDeltaTime, 30, transform.position.z + transform.forward.z * force * speed * Time.fixedDeltaTime);
@@ -49,7 +49,7 @@ public class TurretController : MonoBehaviour {
 								lineRend.SetPosition (0, linePosInicial);
 								lineRend.SetPosition (1, linePosFinal);
 								Vector3 finalPos = new Vector3 (linePosFinal.x, yPos, linePosFinal.z);
-								timeToExplode = (Vector3.Distance (transform.position, finalPos) / (force * speed)) * 100;
+								timeToExplode = (Vector3.Distance (transform.position, finalPos) / (force)) * 100;
 
 						}
 						if (Input.GetMouseButtonUp (0)) {

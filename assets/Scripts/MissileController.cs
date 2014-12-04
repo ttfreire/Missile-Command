@@ -15,7 +15,7 @@ public class MissileController : MonoBehaviour {
 	void Update () {
 		if(networkView.isMine)
 		{
-		transform.position += rigidbody.velocity * speed * Time.fixedDeltaTime;
+		transform.position += rigidbody.velocity * Time.fixedDeltaTime;
 		
 		lifeSpan -= Time.fixedDeltaTime;
 		if ( lifeSpan < 0 ){
