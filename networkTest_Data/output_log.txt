@@ -15,55 +15,15 @@ Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-C
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  1.343 seconds
+- Completed reload, in  1.555 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 2.519028 ms
+UnloadTime: 2.472150 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 253.
-Total: 68.479561 ms (FindLiveObjects: 0.025897 ms CreateObjectMapping: 0.015748 ms MarkObjects: 0.163082 ms  DeleteObjects: 0.008399 ms)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 252.
+Total: 44.334930 ms (FindLiveObjects: 0.017848 ms CreateObjectMapping: 0.014348 ms MarkObjects: 0.136836 ms  DeleteObjects: 0.007349 ms)
 
 Initialize engine version: 4.3.4f1 (e444f76e01cd)
 GfxDevice: creating device client; threaded=1
@@ -82,15 +42,55 @@ Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-C
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  0.961 seconds
+- Completed reload, in  0.761 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.382508 ms
+UnloadTime: 0.253374 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 253.
-Total: 83.247276 ms (FindLiveObjects: 0.019247 ms CreateObjectMapping: 0.015398 ms MarkObjects: 0.149433 ms  DeleteObjects: 0.006999 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 252.
+Total: 50.935265 ms (FindLiveObjects: 0.011548 ms CreateObjectMapping: 0.011548 ms MarkObjects: 0.115838 ms  DeleteObjects: 0.005599 ms)
+
+View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
+
+View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
+
+View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
+
+View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
+
+View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
 
 View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
  
@@ -146,7 +146,23 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-Plaatfotm assormb ay:seH:b\Gy:tHH:b\GMiissHuilb\e-MiCommsilae-Cd\omnemantdw\oetwkTrksTet_Dt_atata\MManageade\B\ooo.La.Lngng.dldl l (thish ies magssa ie i s aharmmleses)s)
+Plaatffro am sessblymb Hy:\ Hit\Hub\itissiuble\Mi-sile-Commano\nemmatdwo\nrketTewostrk_DTeatsta\_DMaatnaa\geMad\naBogeodLa\gBo.do.llLa (ngth.disll m (esthsaisge m iess sahagerm iles ssha)
+rmless)
+View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Couldn't destroy object because the associate network view was not found
+ 
+(Filename:  Line: 1384)
+
+View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Couldn't destroy object because the associate network view was not found
+ 
+(Filename:  Line: 1384)
 
 View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
  
@@ -156,7 +172,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 56 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -164,7 +180,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 55 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -172,7 +188,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 53 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -180,7 +196,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID SceneID: 1 Level Prefix: 0 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 60 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -188,7 +204,15 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 53 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 60 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Couldn't destroy object because the associate network view was not found
+ 
+(Filename:  Line: 1384)
+
+View ID AllocatedID: 64 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 

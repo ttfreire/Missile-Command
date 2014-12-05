@@ -18,16 +18,24 @@ public class MissileController : MonoBehaviour {
 		transform.position += rigidbody.velocity * Time.fixedDeltaTime;
 		
 		lifeSpan -= Time.fixedDeltaTime;
-		if ( lifeSpan < 0 ){
-			createExplosion(explosion);
-		}
+			if ( lifeSpan < 0 ){
+				createExplosion(explosion);
+			}
 		}
 	}
 
 	void OnCollisionEnter (Collision c){
 				
 		if (c.gameObject.tag == "Enemy"&& networkView.isMine) {
-			//createExplosion(explosion);
+			createExplosion(explosion);
+		}
+
+
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag == "Explosion"&& networkView.isMine) {
+			Network.Destroy (this.gameObject);
 		}
 	}
 

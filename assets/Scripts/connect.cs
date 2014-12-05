@@ -102,6 +102,8 @@ public class connect : MonoBehaviour {
 	public void OnPlayerDisconnected(NetworkPlayer player) {
 		if(Network.isServer)
 			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers--;
+		Network.RemoveRPCs(player);
+		Network.DestroyPlayerObjects(player);
 		
 	}
 	

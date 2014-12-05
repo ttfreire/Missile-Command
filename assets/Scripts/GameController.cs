@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour {
 
 		switch (current_gameState) {
 			case GameState.LOBBY:
+				Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
 				
 	

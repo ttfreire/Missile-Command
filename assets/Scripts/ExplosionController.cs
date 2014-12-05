@@ -24,7 +24,7 @@ public class ExplosionController : MonoBehaviour {
 		if (networkView.isMine) {
 						lifeSpan -= Time.deltaTime;
 						if (lifeSpan < 0) {
-								Network.Destroy (gameObject);
+								Network.Destroy (this.gameObject);
 						}
 				}
 	}
@@ -32,7 +32,7 @@ public class ExplosionController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.tag ==  "Enemy"&& networkView.isMine)
 			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
-		if(other.tag !=  "Floor"&& networkView.isMine)
-			Network.Destroy (other.gameObject);
+		//if(other.tag !=  "Floor"&& networkView.isMine)
+			//Network.Destroy (other.gameObject);
 	}
 }
