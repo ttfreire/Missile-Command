@@ -27,7 +27,7 @@ public class MissileController : MonoBehaviour {
 	void OnCollisionEnter (Collision c){
 				
 		if (c.gameObject.tag == "Enemy"&& networkView.isMine) {
-			createExplosion(explosion);
+			//createExplosion(explosion);
 		}
 	}
 
