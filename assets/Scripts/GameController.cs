@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
 	public List<GameObject> playersList;
 	public GameObject turret;
 	public GameObject spectator;
+	public GameObject cityPrefab;
+	GameObject[] citiesSpawns;
 
 	AudioSource themeSource;
 	public int pointsPerKill;
@@ -45,9 +47,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		cityObjects = GameObject.FindGameObjectsWithTag("City");
-		if (Network.isServer)
-			remainingCities = cityObjects.Length;
+
 		UpdateGameState ();
 		
 	}
@@ -86,6 +86,12 @@ public class GameController : MonoBehaviour {
 			//stateGUI = GameObject.Find ("state");
 			//stateGUI.guiText.text = current_gameState.ToString();
 			if (Network.isServer) 
+				citiesSpawns = GameObject.FindGameObjectsWithTag("CitySpawner");
+				foreach(GameObject spawn in citiesSpawns){
+					Network.Instantiate(cityPrefab, spawn.transform.position, spawn.transform.rotation, 0);	
+				}
+					
+				
 				for(int i = 0; i< maxPlayers;i++)
 				{
 					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
@@ -150,6 +156,8 @@ public class GameController : MonoBehaviour {
 			break;	
 				
 		case GameState.PLAYING:
+			cityObjects = GameObject.FindGameObjectsWithTag("City");
+			remainingCities = cityObjects.Length;
 			if (remainingCities == 0) {
 				nextActionTime += Time.deltaTime;
 				if (nextActionTime > periodGame) { 

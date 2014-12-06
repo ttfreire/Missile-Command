@@ -49,7 +49,7 @@ public class TurretController : MonoBehaviour {
 								lineRend.SetPosition (0, linePosInicial);
 								lineRend.SetPosition (1, linePosFinal);
 								Vector3 finalPos = new Vector3 (linePosFinal.x, yPos, linePosFinal.z);
-								timeToExplode = (Vector3.Distance (transform.position, finalPos) / (force * speed))*1000;
+								timeToExplode = (Vector3.Distance(transform.position,finalPos)/(force*speed))*120;
 
 						}
 						if (Input.GetMouseButtonUp (0)) {
@@ -60,7 +60,10 @@ public class TurretController : MonoBehaviour {
 				}
 		if(!networkView.isMine){
 			GetComponentInChildren<Camera>().enabled = false;
-			GameObject.Find("Spectator(Clone)").camera.enabled = false;
+			GameObject[] gameaux = GameObject.FindGameObjectsWithTag("Spectator");
+			if(gameaux != null)
+				foreach(GameObject aux in gameaux)
+					aux.camera.enabled = false;
 		}
 	}
 
@@ -69,7 +72,7 @@ public class TurretController : MonoBehaviour {
 		if (networkView.isMine) {
 						Rigidbody rocketClone = (Rigidbody)Network.Instantiate (rocket, myCamera.transform.position, myCamera.transform.rotation, 0);
 						rocketClone.GetComponent<MissileController> ().lifeSpan = lifespan;
-						rocketClone.velocity = myCamera.transform.forward * force / 100;
+						rocketClone.velocity = myCamera.transform.forward * force/10;
 						missileSource.PlayOneShot (missileSource.clip);
 						if (ammo > 0)
 								ammo--;
