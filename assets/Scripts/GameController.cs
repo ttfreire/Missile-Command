@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour {
 	public float periodOver;
 	public float periodGame;
 	public int numPlayers = 0;
+	public int maxPlayers = 2;
+	int playingplayers = 0;
 
 	EnemySpawner enemySpawner;
 	GameObject player;
@@ -17,6 +19,7 @@ public class GameController : MonoBehaviour {
 	GameObject background;
 	public List<GameObject> playersList;
 	public GameObject turret;
+	public GameObject spectator;
 
 	AudioSource themeSource;
 	public int pointsPerKill;
@@ -24,6 +27,8 @@ public class GameController : MonoBehaviour {
 	int remainingCities;
 
 	PlayerNode newEntry;
+
+	GameObject stateGUI;
 
 	public List<PlayerNode> playerList = new List<PlayerNode>();
 	public class PlayerNode {
@@ -58,29 +63,30 @@ public class GameController : MonoBehaviour {
 				Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
 				
-	
+			
 				break;
 			
 			case GameState.MATCHMAKING:
 			{
+
 				if(Network.isServer)
 			{
 				playersList.Add(GameObject.Find("Player1"));
 				playersList.Add(GameObject.Find("Player2"));
 				
-			}
+			}else
+				//if(networkView.isMine)
+					networkView.RPC("addPlayingPlayer", RPCMode.Server);
 			}
 			
 
-			//networkView.RPC("selectPlayer", RPCMode.Server, Network.player);
-			//if(Network.isServer)
-			//	networkView.RPC("informPlayerToClient", Network.player, player );
 			break;	
 			
 			case GameState.PLAYING:
-
+			//stateGUI = GameObject.Find ("state");
+			//stateGUI.guiText.text = current_gameState.ToString();
 			if (Network.isServer) 
-				for(int i = 0; i< playerList.Count;i++)
+				for(int i = 0; i< maxPlayers;i++)
 				{
 					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
 					
@@ -108,6 +114,12 @@ public class GameController : MonoBehaviour {
 
 				break;
 				
+		case GameState.SPECTATING:
+			//stateGUI = GameObject.Find ("state");
+			//stateGUI.guiText.text = current_gameState.ToString();
+			Network.Instantiate(spectator, Vector3.zero, Quaternion.identity, 0);
+			break;
+			
 			case GameState.GAMEOVER:
 				nextActionTime = 0f;
 				Application.LoadLevel("gameOver");
@@ -124,28 +136,40 @@ public class GameController : MonoBehaviour {
 				break;
 				
 			case GameState.MATCHMAKING:
-			if(Input.GetKeyUp(KeyCode.Space))
+
+			nextActionTime += Time.deltaTime;
+			if (nextActionTime > periodGame) { 
+				nextActionTime = 0;
+				if(playingplayers == maxPlayers)
 					EnterGameState(GameState.PLAYING);
-				break;	
-				
-			case GameState.PLAYING:
-			if(networkView.isMine)
-			{
+				else if(playingplayers >= maxPlayers)
+					EnterGameState(GameState.SPECTATING);
+			}
 			
-				if (remainingCities == 0) {
-					nextActionTime += Time.deltaTime;
-					if (nextActionTime > periodGame) { 
-						EnterGameState(GameState.GAMEOVER);
-					}
+
+			break;	
+				
+		case GameState.PLAYING:
+			if (remainingCities == 0) {
+				nextActionTime += Time.deltaTime;
+				if (nextActionTime > periodGame) { 
+					EnterGameState(GameState.GAMEOVER);
 				}
 			}
+			
+			break;
 
-
-			if(Input.GetKeyUp(KeyCode.Space))
+			case GameState.SPECTATING:
+			if (remainingCities == 0) {
+				nextActionTime += Time.deltaTime;
+				if (nextActionTime > periodGame) { 
 					EnterGameState(GameState.GAMEOVER);
-				break;
-				
-			case GameState.GAMEOVER:
+				}
+			}
+			
+			break;
+			
+		case GameState.GAMEOVER:
 				if (nextActionTime > periodOver) { 
 					Application.LoadLevel ("gameScene");
 					EnterGameState(GameState.LOBBY);
@@ -194,18 +218,10 @@ public class GameController : MonoBehaviour {
 
 	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
-		int numberofcities = 0;
-		if (stream.isWriting) {
-			numberofcities = remainingCities;
+
 			stream.Serialize (ref numPlayers);
-			stream.Serialize (ref numberofcities);
-		}
-		else {
-			
-			stream.Serialize (ref numPlayers);
-			stream.Serialize (ref numberofcities);
-			remainingCities = numberofcities;
-		}
+			stream.Serialize (ref remainingCities);
+			stream.Serialize (ref playingplayers);
 		
 	}
 
@@ -215,12 +231,13 @@ public class GameController : MonoBehaviour {
 			newEntry.playerSpawn = null;
 			newEntry.networkPlayer = player;
 			playerList.Add (newEntry);
-			
-			
 	}
 
-	public void OnNetworkInstantiate (NetworkMessageInfo info) {
-		
+	[RPC]
+	public void addPlayingPlayer(){
+		playingplayers++;
+		Debug.Log ("Playing Players: " + playingplayers);
 	}
+	
 
 }

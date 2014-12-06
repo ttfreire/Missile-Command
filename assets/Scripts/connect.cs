@@ -18,7 +18,7 @@ public class connect : MonoBehaviour {
 
 	public void OnGUI ()
 	{
-		
+
 		if (Network.peerType == NetworkPeerType.Disconnected){
 			//We are currently disconnected: Not a client or host
 			GUILayout.Label("Connection status: Disconnected");
@@ -49,11 +49,11 @@ public class connect : MonoBehaviour {
 			//We've got a connection(s)!
 			
 			
-			if (Network.peerType == NetworkPeerType.Connecting){
+			//if (Network.peerType == NetworkPeerType.Connecting && networkView.isMine){
 				
-				GUILayout.Label("Connection status: Connecting");
+			//	GUILayout.Label("Connection status: Connecting");
 				
-			} else if (Network.peerType == NetworkPeerType.Client){
+			if (Network.peerType == NetworkPeerType.Client && networkView.isMine){
 				
 				GUILayout.Label("Connection status: Client!");
 				GUILayout.Label("Ping to server: "+Network.GetAveragePing(  Network.connections[0] ) );		

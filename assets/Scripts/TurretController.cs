@@ -60,6 +60,7 @@ public class TurretController : MonoBehaviour {
 				}
 		if(!networkView.isMine){
 			GetComponentInChildren<Camera>().enabled = false;
+			GameObject.Find("Spectator(Clone)").camera.enabled = false;
 		}
 	}
 
