@@ -21,17 +21,27 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision c){
-		if (c.gameObject.name == "City") {
-			Rigidbody explosionObject = (Rigidbody) Instantiate(destruction, transform.position, Quaternion.identity);
+		if (c.gameObject.name == "City" && Network.isServer) {
+			Rigidbody explosionObject = (Rigidbody) Network.Instantiate(destruction, transform.position, Quaternion.identity,0);
 			AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
-			Destroy(c.gameObject);
+			Network.Destroy(c.gameObject);
 			Network.Destroy (this.gameObject);
 		}
 
-		if (c.gameObject.name == "Floor") {
+		if (c.gameObject.name == "Floor" && Network.isServer) {
 			Network.Destroy(this.gameObject);
 		}
 	}
 
+	void OnTriggerEnter(Collider other) {
+		if (!enabled)
+			return;
+
+		if (other.gameObject.tag == "Explosion"&& networkView.isMine) {
+			Network.Destroy (this.gameObject);
+
+			enabled = false;
+		}
+	}
 
 }

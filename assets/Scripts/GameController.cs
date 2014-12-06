@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
 	AudioSource themeSource;
 	public int pointsPerKill;
 	public GameState current_gameState = GameState.NONE;
+	int remainingCities;
 
 	PlayerNode newEntry;
 
@@ -40,6 +41,8 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		cityObjects = GameObject.FindGameObjectsWithTag("City");
+		if (Network.isServer)
+			remainingCities = cityObjects.Length;
 		UpdateGameState ();
 		
 	}
@@ -84,6 +87,8 @@ public class GameController : MonoBehaviour {
 					playersList.RemoveAt(0);
 					
 				}
+			enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
+			enemySpawner.canSpawn = true;
 	
 			if(!Network.isServer)
 			{
@@ -97,8 +102,7 @@ public class GameController : MonoBehaviour {
 				camera = GameObject.FindGameObjectWithTag ("MainCamera");
 				if(!networkView.isMine)
 					camera.GetComponentInChildren<AudioListener>().enabled=false;
-				enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
-				enemySpawner.canSpawn = true;
+
 				AudioSource.PlayClipAtPoint(themeSource.clip,player.transform.position);
 			}
 
@@ -125,11 +129,10 @@ public class GameController : MonoBehaviour {
 				break;	
 				
 			case GameState.PLAYING:
-			if(!Network.isServer && networkView.isMine)
+			if(networkView.isMine)
 			{
-				EnablePlayerControl();
 			
-				if (cityObjects.Length == 0) {
+				if (remainingCities == 0) {
 					nextActionTime += Time.deltaTime;
 					if (nextActionTime > periodGame) { 
 						EnterGameState(GameState.GAMEOVER);
@@ -191,15 +194,17 @@ public class GameController : MonoBehaviour {
 
 	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
-		
+		int numberofcities = 0;
 		if (stream.isWriting) {
-			
+			numberofcities = remainingCities;
 			stream.Serialize (ref numPlayers);
-
+			stream.Serialize (ref numberofcities);
 		}
 		else {
 			
 			stream.Serialize (ref numPlayers);
+			stream.Serialize (ref numberofcities);
+			remainingCities = numberofcities;
 		}
 		
 	}

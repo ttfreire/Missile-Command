@@ -30,6 +30,7 @@ public class ExplosionController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+
 		if(other.tag ==  "Enemy"&& networkView.isMine)
 			score.guiText.text = (int.Parse(score.guiText.text) + pointsPerKill).ToString();
 		//if(other.tag !=  "Floor"&& networkView.isMine)

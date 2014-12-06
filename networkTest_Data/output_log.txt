@@ -15,15 +15,15 @@ Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-C
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  1.555 seconds
+- Completed reload, in  0.770 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 2.472150 ms
+UnloadTime: 2.760171 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 252.
-Total: 44.334930 ms (FindLiveObjects: 0.017848 ms CreateObjectMapping: 0.014348 ms MarkObjects: 0.136836 ms  DeleteObjects: 0.007349 ms)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 258.
+Total: 57.700779 ms (FindLiveObjects: 0.026247 ms CreateObjectMapping: 0.024497 ms MarkObjects: 0.181981 ms  DeleteObjects: 0.009099 ms)
 
 Initialize engine version: 4.3.4f1 (e444f76e01cd)
 GfxDevice: creating device client; threaded=1
@@ -42,95 +42,15 @@ Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-C
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading H:\GitHub\Missile-Command\networkTest_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  0.761 seconds
+- Completed reload, in  0.600 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.253374 ms
+UnloadTime: 0.344365 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 252.
-Total: 50.935265 ms (FindLiveObjects: 0.011548 ms CreateObjectMapping: 0.011548 ms MarkObjects: 0.115838 ms  DeleteObjects: 0.005599 ms)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
-
-View ID AllocatedID: 0 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Received state update for view id' AllocatedID: 0' but the NetworkView doesn't exist
- 
-(Filename:  Line: 2469)
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 258.
+Total: 51.802475 ms (FindLiveObjects: 0.012248 ms CreateObjectMapping: 0.011898 ms MarkObjects: 0.135786 ms  DeleteObjects: 0.005599 ms)
 
 NullReferenceException: Object reference not set to an instance of an object
   at GameController.EnterGameState (GameState newGameState) [0x00000] in <filename unknown>:0 
@@ -146,9 +66,9 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-Plaatffro am sessblymb Hy:\ Hit\Hub\itissiuble\Mi-sile-Commano\nemmatdwo\nrketTewostrk_DTeatsta\_DMaatnaa\geMad\naBogeodLa\gBo.do.llLa (ngth.disll m (esthsaisge m iess sahagerm iles ssha)
-rmless)
-View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+PPlattforrm aasseemblly:  H:\\GittHubb\Miisssille-CCoommmanand\d\nntworetkTwoesrktTDaestat_\MDaantaag\Medan\Bagooed.L\Banoog..Ldlanl g(dthllis ( mthesissa mgees iags e haisrm hlearssml)
+ess)
+View ID AllocatedID: 52 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -156,7 +76,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 152 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 52 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -164,31 +84,7 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename:  Line: 1384)
-
-View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename:  Line: 1384)
-
-View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
- 
-(Filename:  Line: 1676)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename:  Line: 1384)
-
-View ID AllocatedID: 54 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 52 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
@@ -212,11 +108,185 @@ Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
 
-View ID AllocatedID: 64 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 60 not found during lookup. Strange behaviour may occur
  
 (Filename:  Line: 1676)
 
 Couldn't destroy object because the associate network view was not found
  
 (Filename:  Line: 1384)
+
+View ID AllocatedID: 60 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Couldn't destroy object because the associate network view was not found
+ 
+(Filename:  Line: 1384)
+
+View ID AllocatedID: 60 not found during lookup. Strange behaviour may occur
+ 
+(Filename:  Line: 1676)
+
+Couldn't destroy object because the associate network view was not found
+ 
+(Filename:  Line: 1384)
+
+Viiew  ID  SceeneeID:: 233 LeveelelP Pefeixix 0 0nono f funun d drunginlo lkoopk Sp. ratngan be haehiovir uraym y couc
+ ur
+(
+ le
+(Famle:n ainee:  1Li76e)
+
+16ec6)iv
+
+ede eitaetd ustdatee uporatvi fw ridvi Swcidne SD:en23 IDev 2l P Lefvixl  P' efutx:th0'  etutor Vihew Neoewsnrkt iexi dt
+ sn
+(Ft lexiamt
+   
+(Liile:na24e69  
+
+iniew  ID46Sc)e
+
+eIie: 2 I L Svcl nPrIef: x:4 0 evotl forendixdu r nngt lfookndp.duStinan le bokhap.ioStr anaye ocecuav
+ ou
+(F mlanymeoc  urin
+ 
+: Fi6l6)na
+
+meece  veid e:ta16e 6)pd
+
+atee eioredv ewtaide  SpdenaIDe  f4 Lr veie P idefi S: en'ebuDt  2he LNevewo PkVefeiw : oe' bnutt thxi sett
+ 
+(rkiliena de:es L'tneex 2st69
+ 
+
+(Fiele Iam S: enLiIDe: 124 6Le)
+
+l ierwfiID: S0 enotI : ou7 dLduveilg Proekuix.  0 trotngfo bndhaduiouin ma l ooccupr
+  S
+(Fralnnamee:be Laineio 1r67ma)
+
+oRecuei
+ ed
+(Fstleteamup:da tei fe:r 16ie6) i
+
+d'eceSieveId : t17teLeupela Pe efoix v 0ew buid t Se eneewoD:kV17ew dLoeven' P eefisx:
+ 0'
+(Fbule tame :  eLtiwnrk:V24ew9)do
+
+esie't  D SxieseI
+ : 
+(F8 leevaee: P Lefinx:  046n9t 
+f
+Viued  Iur SngenlooIDup .8 LSeraelge Preheviixur 0mano o couurd
+ d
+(inil lnaoke:p. LStne:a n6g6e)
+
+haecioivr d aytaocecupr
+ te
+(Ffir enieme i d' Scinne: D: 678 )
+
+veelcPreivixd  0ta be t pdhat N ftororviViw w ddo Ssc'tneexD:s 
+ 8 
+(FevlelnPaefe:x: L0'nebu 2 t69e 
+
+etieor IDViScw ndIDes 2't  evxil t
+ ef
+(Fxi 0ennome f  unin d: ri4ng9)lo
+
+okup.i Sw raD gecebeeIav: ou1  meayelo cure
+ ix
+(F il nnat efo  ndindu: in676 )
+
+okecpe ivtrd ngta be hapdioter foma vyewo icur' S
+ ce
+(FeIlD:n a1 e:ev elinPr: fi6x:6)0'
+
+ bect ivhed NettwterkVuidaw edofesrn'vi ew isd'
+ Sc
+(FneleD:am21: LeLiele  P4r9ef
+
+x:ie0w  bD t ceheeINe: wo2 kLeivewl doresnixt  0xinot
+ fo
+(Fndleduamin:  lLioke:p.24S6ra)
+
+eVibewhIDviScurneImDy  2cc Lr
+ el
+(FPrlefnime:    nint :f1676un
+
+ decriivg d sooatup u Sdtrtengfo b vhaewioid'r ScayneocD:ur22
+ 
+(evill nareefi x:L 0ne b ut67th)
+
+Neetweirkediest aoee n'pd eteisfo
+  v
+(Fei ld'naSce: n LIDne 2 2 Le69e)
+
+Priefw xID 0Sc euteItD:e 19 etewelrkPriefw x:oe0snn't  eounis d
+ ri
+(Fg leooamup:  SLtrnaege 2beh69vi
+
+uV meaw oIDcuSr
+ n
+(IFi: en9 meev  lLiPneef 1x:76)0 
+
+noeteivfod ndtadue inpd lteo kfopr  vitrw ngd' bSeenaeIDi: 1ur Lmeael oPcefurx:
+ 
+(' ilutnathe: N etLwonekV i67w6do
+
+sne'c eivisd 
+ t
+(Fe lunadae:e f orinvi: w 46d9) S
+
+ceinw IDD  1ce LeIve:  P0 efevx:l 0'rebuix t 0e noet forunVi dw rinoe lnoot upxi St
+ an
+(Fe leehamvio:ur  Layneoc 2ur69
+ 
+(
+
+Fiilew amD : ceLieIe:: 1276 L
+e
+ReeleiPredfist: te nupotatfo fndr dviriw g d'ooScupn.IDSt 2an Le veel avreourixma 0 ' ccutrt 
+( Niletwoamkeie   dines: 't67exi)
+
+
+ ec
+(Fivled amta: e Lupneat 2 46or)
+ 
+Viiew  IDd' ScceneeID:: 250 Leevell Prrefiix:  0 n bt t ouhed NeurwongkVloewk p.oeSsra'tgeexbestav
+ 
+(uF mley amcc:ur L
+ 
+(e:il24na9)e:
+
+  iein e:D 16ce6ne
+I
+Re: ei5veLe selatPerupfiat:e 0 orotvifow ni d' riceg eIoDku 2.  Ltrveng P befhax:io0'r buay toce uret
+ 
+(rkiliena moe: n'Li nxi: t
+ 76
+(F
+
+leecamiv:e L sneat e46up)
+a
+Vie w orD SvenewIDid 2 S LenveIl : re5 ix:ev0eno P fefunx: d0ur bngt lohekuNe. wotrkVngew bdohasniot rexmays o
+ cu
+(F
+ l
+(amil: naLie:e: L24n6: 1)
+
+)
+
+ewec ivDe S cetaeIe : pd6 teevfolr Priew ixd' 0Scnone fD:u n6  devril g reofkux:. 0'trbuntgth e ehetviookVriemw ydoocsnurt e
+ 
+(stil
+ 
+(aFie:en Lmene   1in76: 
+
+46ec)e
+
+ived state update for view id' SceneID: 26 Level Prefix: 0' but the NetworkView doesn't exist
+ 
+(Filename:  Line: 2469)
 

@@ -34,8 +34,13 @@ public class MissileController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+
+		if (!enabled)
+			return;
+
 		if (other.gameObject.tag == "Explosion"&& networkView.isMine) {
 			Network.Destroy (this.gameObject);
+			enabled = false;
 		}
 	}
 
