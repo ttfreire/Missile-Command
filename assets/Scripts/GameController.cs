@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
 	public GameObject spectator;
 	public GameObject cityPrefab;
 	GameObject[] citiesSpawns;
+	public GameObject enemiesSpawner;
 
 	AudioSource themeSource;
 	public int pointsPerKill;
@@ -101,8 +102,10 @@ public class GameController : MonoBehaviour {
 					playersList.RemoveAt(0);
 					
 				}
-			enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
-			enemySpawner.canSpawn = true;
+				Transform enemy_spawn_pos = GameObject.FindGameObjectWithTag("Respawn").transform;  
+				Network.Instantiate(enemiesSpawner, enemy_spawn_pos.position, enemy_spawn_pos.rotation, 0);	
+				enemySpawner = FindObjectOfType<EnemySpawner>();
+				enemySpawner.GetComponent<EnemySpawner>().canSpawn = true;
 			}
 			else
 			{
