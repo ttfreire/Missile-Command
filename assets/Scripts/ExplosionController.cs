@@ -16,7 +16,7 @@ public class ExplosionController : MonoBehaviour {
 		game = GameObject.Find ("Game");
 		//pointsPerKill = game.GetComponent<GameController> ().pointsPerKill;
 		pointsPerKill = 100;
-		score = GameObject.Find ("Score");
+		score = GameObject.Find ("Score(Clone)");
 	}
 	
 	// Update is called once per frame
