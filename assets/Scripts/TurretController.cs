@@ -26,7 +26,7 @@ public class TurretController : MonoBehaviour {
 
 			lineRend = GetComponentInChildren<LineRenderer> ();
 			missileSource = audio;
-			ammotext = GameObject.Find ("Ammo Value");
+			ammotext = GameObject.Find ("Ammo Value(Clone)");
 			ammotext.guiText.text = ammo.ToString ();
 			GetComponent<MouseLook>().enabled = true;
 		}

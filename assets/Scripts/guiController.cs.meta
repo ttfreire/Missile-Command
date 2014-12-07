@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: a65ea62459e540a49bf8370a61d30e81
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - score: {fileID: 13200000, guid: 60dbf48cad426de488a92b183914c737, type: 2}
+  - ammoLabel: {fileID: 13200000, guid: 50b79c961be7e7e48b440abe920ae4af, type: 2}
+  - ammoCount: {fileID: 13200000, guid: 884505d20bb9ca145929748503c1a8ff, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

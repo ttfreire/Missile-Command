@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour {
 		DontDestroyOnLoad (this);
 		playersList = new List<GameObject>();
 		EnterGameState(GameState.LOBBY);
+		citiesSpawns = null;
 	}
 	
 	// Update is called once per frame
@@ -83,9 +84,9 @@ public class GameController : MonoBehaviour {
 			break;	
 			
 			case GameState.PLAYING:
-			//stateGUI = GameObject.Find ("state");
-			//stateGUI.guiText.text = current_gameState.ToString();
+
 			if (Network.isServer) 
+			{
 				citiesSpawns = GameObject.FindGameObjectsWithTag("CitySpawner");
 				foreach(GameObject spawn in citiesSpawns){
 					Network.Instantiate(cityPrefab, spawn.transform.position, spawn.transform.rotation, 0);	
@@ -101,16 +102,16 @@ public class GameController : MonoBehaviour {
 				}
 			enemySpawner = GameObject.Find("enemiesSpawner").GetComponent<EnemySpawner>();
 			enemySpawner.canSpawn = true;
-	
-			if(!Network.isServer)
+			}
+			else
 			{
 			// Enabling UI elements
 				GameObject.Find("MinimapCamera").GetComponent<Camera>().enabled = true;
-				GameObject[] uiElements = GameObject.FindGameObjectsWithTag("UI");
-				foreach(GameObject element in uiElements)
-				{
-					element.GetComponent<GUIText>().enabled = true;
-				}
+				//GameObject[] uiElements = GameObject.FindGameObjectsWithTag("UI");
+				//foreach(GameObject element in uiElements)
+				//{
+				//	element.GetComponent<GUIText>().enabled = true;
+				//}
 				camera = GameObject.FindGameObjectWithTag ("MainCamera");
 				if(!networkView.isMine)
 					camera.GetComponentInChildren<AudioListener>().enabled=false;
@@ -121,8 +122,7 @@ public class GameController : MonoBehaviour {
 				break;
 				
 		case GameState.SPECTATING:
-			//stateGUI = GameObject.Find ("state");
-			//stateGUI.guiText.text = current_gameState.ToString();
+
 			Network.Instantiate(spectator, Vector3.zero, Quaternion.identity, 0);
 			break;
 			
