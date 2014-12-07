@@ -4,6 +4,7 @@ using System.Collections;
 public class connect : MonoBehaviour {
 	public string connectToIP = "127.0.0.1";
 	public int connectPort = 25001;
+	public string playerName = "Name";
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,8 @@ public class connect : MonoBehaviour {
 			
 			connectToIP = GUILayout.TextField(connectToIP, GUILayout.MinWidth(100));
 			connectPort = int.Parse(GUILayout.TextField(connectPort.ToString()));
-			
+			playerName = GUILayout.TextField(playerName, GUILayout.MinWidth(100));
+			Debug.Log(playerName);
 			GUILayout.BeginVertical();
 			if (GUILayout.Button ("Connect as client"))
 			{
@@ -100,11 +102,11 @@ public class connect : MonoBehaviour {
 	}
 	
 	public void OnPlayerDisconnected(NetworkPlayer player) {
-		if(Network.isServer)
-			GameObject.Find ("Game").GetComponent<GameController> ().numPlayers--;
-		Network.RemoveRPCs(player);
-		Network.DestroyPlayerObjects(player);
-		
+		if (Network.isServer) {
+						GameObject.Find ("Game").GetComponent<GameController> ().numPlayers--;
+						Network.RemoveRPCs (player);
+						Network.DestroyPlayerObjects (player);
+				}
 	}
 	
 	

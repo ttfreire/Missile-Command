@@ -17,48 +17,49 @@ public class chat : MonoBehaviour {
 	public Rect window ;
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	public ArrayList playerList = new ArrayList();
 	public class PlayerNode {
 		public string playerName;
 		public NetworkPlayer networkPlayer;
 	}
-
+	
 	public ArrayList chatEntries = new ArrayList();
 	public class ChatEntry
 	{
 		public string name  = "";
 		public string text = "";	
 	}
-
+	
 	public void Awake(){
 		window = new Rect(Screen.width/2-width/2, Screen.height-height+5, width, height);
 		
-		//We get the name from the masterserver example, if you entered your name there ;).
-		playerName = PlayerPrefs.GetString("playerName", "");
-		if(playerName==null || playerName==""){
-			playerName = "RandomName"+Random.Range(1,999);
-		}	
+
 		
 	}
 	
 	
 	//Client public void
 	public void OnConnectedToServer() {
+		//We get the name from the masterserver example, if you entered your name there ;).
+		playerName = GameObject.Find ("Network").GetComponent<connect> ().playerName;
+		if(playerName==null || playerName==""){
+			playerName = "RandomName"+Random.Range(1,999);
+		}	
 		ShowChatWindow();
 		networkView.RPC ("TellServerOurName", RPCMode.Server, playerName);
+		// //We could have also announced ourselves:
 		// addGameChatMessage(playerName" joined the chat");
 		// //But using "TellServer.." we build a list of active players which we can use for other stuff as well.
 	}
 	
-
 	//Server public void
 	public void OnServerInitialized() {
 		ShowChatWindow();
@@ -78,7 +79,7 @@ public class chat : MonoBehaviour {
 				return entry;
 			}
 		}
-		
+		Debug.LogError("GetPlayerNode: Requested a playernode of non-existing player!");
 		return null;
 	}
 	
@@ -98,11 +99,10 @@ public class chat : MonoBehaviour {
 	//Server public void
 	public void OnPlayerConnected(NetworkPlayer player) {
 		addGameChatMessage("Player connected from: " + player.ipAddress +":" + player.port);
-		networkView.RPC ("SendMsgToClient", player, "");
 	}
 	
 	[RPC]
-		//Sent by newly connected clients, recieved by server
+	//Sent by newly connected clients, recieved by server
 	public void TellServerOurName(string name, NetworkMessageInfo info){
 		PlayerNode newEntry  = new PlayerNode();
 		newEntry.playerName=name;
@@ -195,73 +195,36 @@ public class chat : MonoBehaviour {
 	
 	public void HitEnter(string msg){
 		msg = msg.Replace("\n", "");
-		networkView.RPC("SendMsgToServer", RPCMode.Server, Network.player, playerName, msg);
+		networkView.RPC("ApplyGlobalChatText", RPCMode.All, playerName, msg);
 		inputField = ""; //Clear line
-		//GUI.UnfocusWindow ();//Deselect chat
-		//lastUnfocusTime=Time.time;
-		//usingChat=false;
+		GUI.UnfocusWindow ();//Deselect chat
+		lastUnfocusTime=Time.time;
+		usingChat=false;
 	}
-
+	
+	
 	[RPC]
-	public void SendMsgToServer(NetworkPlayer np, string name, string msg)
+	public void ApplyGlobalChatText (string name, string msg)
 	{
-
-	}
-	/**
-	[RPC]
-	public void SendMsgToServer(NetworkPlayer np, string name, string msg)
-	{
-		foreach (Player p in Game.m_world.m_players) {
-
-			if (p.m_networkPlayer == np) {
-
-				string r = p.ParseCommand (msg);
-				if(msg.ToLower().StartsWith("falar"))
-				{
-					foreach (Player otherP in Game.m_world.m_players) {
-				    	if(otherP.m_location.Equals(p.m_location) && otherP != p)
-							networkView.RPC ("SendMsgToClient", otherP.m_networkPlayer, p.m_name+" fala para TODOS: "+r);
-					}
-				}
-				if(msg.ToLower().StartsWith("cochichar"))
-				{
-					string playerName = r.Substring(r.LastIndexOf(" ")+1);
-					r.Remove(r.LastIndexOf(" "));
-					foreach (Player otherP in Game.m_world.m_players) {
-						if(otherP.m_location.Equals(p.m_location) && otherP.m_name.ToLower().Equals(playerName.ToLower()))
-							networkView.RPC ("SendMsgToClient", otherP.m_networkPlayer, p.m_name+" cochicha para VOCE: "+r);
-					}
-				}
-				networkView.RPC ("SendMsgToClient", np, r);
-			}
-		}
-	}
-	**/
-
-	[RPC]
-	public void SendMsgToClient(string msg) {
-		
 		var entry = new ChatEntry();
-		entry.name = "" ;
+		entry.name = name;
 		entry.text = msg;
 		
 		chatEntries.Add(entry);
 		
 		//Remove old entries
-		if (chatEntries.Count > 20){
+		if (chatEntries.Count > 70){
 			chatEntries.RemoveAt(0);
 		}
 		
 		scrollPosition.y = 1000000;	
 	}
-
-
 	
 	//Add game messages etc
 	public void addGameChatMessage(string str){
-//		ApplyGlobalChatText("", str);
+		ApplyGlobalChatText("", str);
 		if(Network.connections.Length>0){
-			//networkView.RPC("ApplyGlobalChatText", RPCMode.Others, "", str);	
+			networkView.RPC("ApplyGlobalChatText", RPCMode.Others, "", str);	
 		}	
-}
+	}
 }

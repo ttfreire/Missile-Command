@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
 			case GameState.LOBBY:
 				Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
-				
+
 			
 				break;
 			
@@ -77,6 +77,7 @@ public class GameController : MonoBehaviour {
 				
 			}else
 				//if(networkView.isMine)
+					GameObject.FindObjectOfType<chat>().enabled = false;
 					networkView.RPC("addPlayingPlayer", RPCMode.Server);
 			}
 			
