@@ -18,9 +18,9 @@ public class TurretController : MonoBehaviour {
 	public Color m_myColor;
 
 	void Start () {
-		m_myColor = Color.yellow;
+		m_myColor = renderer.material.color;
 		if (networkView.isMine) {
-		
+
 			force = initialForce;
 
 			Screen.showCursor = false;
@@ -40,7 +40,7 @@ public class TurretController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = m_myColor;
-		Debug.Log(m_myColor);
+		transform.GetChild(0).GetChild(0).GetChild(4).renderer.material.color = m_myColor;
 		if (networkView.isMine) {
 
 
