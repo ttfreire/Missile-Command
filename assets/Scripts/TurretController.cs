@@ -19,9 +19,8 @@ public class TurretController : MonoBehaviour {
 
 	void Start () {
 		if (networkView.isMine) {
-			GameObject eu = this.gameObject;
-			//eu.renderer.material.color = Color.blue;
-			m_myColor = this.transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = Color.blue;
+		
+			m_myColor = Color.blue;
 			force = initialForce;
 
 			Screen.showCursor = false;
@@ -40,8 +39,11 @@ public class TurretController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		this.transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = m_myColor;
 		if (networkView.isMine) {
-						myCamera.fieldOfView = (float)(480 / force);
+
+
+			myCamera.fieldOfView = (float)(480 / force);
 						if (Input.GetMouseButton (0)) {
 								lineRend.enabled = true;
 								force += 0.2f;
