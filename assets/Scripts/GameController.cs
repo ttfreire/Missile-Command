@@ -141,8 +141,10 @@ public class GameController : MonoBehaviour {
 		
 		switch (current_gameState) {
 			case GameState.LOBBY:
-			if(Input.GetKeyUp(KeyCode.Space))
+			if(Network.isServer)
 					EnterGameState(GameState.MATCHMAKING);
+			else if (GameObject.FindObjectOfType<chat>().ready)
+				EnterGameState(GameState.MATCHMAKING);
 				break;
 				
 			case GameState.MATCHMAKING:

@@ -15,6 +15,7 @@ public class chat : MonoBehaviour {
 	public string playerName;
 	public float lastUnfocusTime =0;
 	public Rect window ;
+	public bool ready = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -134,7 +135,12 @@ public class chat : MonoBehaviour {
 		if(!showChat){
 			return;
 		}
-		
+		GUILayout.BeginVertical();
+		if (GUILayout.Button ("Enter Matchmaking"))
+		{
+			ready = true;
+		}
+		GUILayout.EndVertical();
 		GUI.skin = skin;		
 		
 		if (Event.current.type == EventType.keyDown && Event.current.character == '\n' && inputField.Length <= 0)
