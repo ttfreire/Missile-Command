@@ -15,12 +15,12 @@ public class TurretController : MonoBehaviour {
 	public int ammo;
 	GameObject ammotext;
 	float timeToExplode;
-	Color m_myColor;
+	public Color m_myColor;
 
 	void Start () {
+		m_myColor = Color.yellow;
 		if (networkView.isMine) {
 		
-			m_myColor = Color.blue;
 			force = initialForce;
 
 			Screen.showCursor = false;
@@ -30,7 +30,7 @@ public class TurretController : MonoBehaviour {
 			missileSource = audio;
 			ammotext = GameObject.Find ("Ammo Value(Clone)");
 			ammotext.guiText.text = ammo.ToString ();
-			GetComponent<MouseLook>().enabled = true;
+			//GetComponent<MouseLook>().enabled = true;
 		}
 		else{
 			GetComponent<MouseLook>().enabled = false;
@@ -39,7 +39,8 @@ public class TurretController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = m_myColor;
+		transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = m_myColor;
+		Debug.Log(m_myColor);
 		if (networkView.isMine) {
 
 
