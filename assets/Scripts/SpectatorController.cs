@@ -23,7 +23,7 @@ public class SpectatorController : MonoBehaviour {
 				if (Input.GetKeyUp (KeyCode.LeftArrow)) {
 						index = (index - 1) % players.Length;
 				}
-				p_camera = players [index].GetComponentInChildren<Camera> ();
+				p_camera = players[index].GetComponentInChildren<Camera> ();
 				camera.transform.position = p_camera.transform.position;
 				camera.transform.rotation = p_camera.transform.rotation;
 		}

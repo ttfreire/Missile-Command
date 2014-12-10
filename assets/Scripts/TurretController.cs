@@ -15,10 +15,13 @@ public class TurretController : MonoBehaviour {
 	public int ammo;
 	GameObject ammotext;
 	float timeToExplode;
-
+	Color m_myColor;
 
 	void Start () {
 		if (networkView.isMine) {
+			GameObject eu = this.gameObject;
+			//eu.renderer.material.color = Color.blue;
+			m_myColor = this.transform.GetChild(0).GetChild(0).GetChild(0).renderer.material.color = Color.blue;
 			force = initialForce;
 
 			Screen.showCursor = false;
@@ -85,6 +88,21 @@ public class TurretController : MonoBehaviour {
 			GUI.DrawTexture(new Rect(Screen.width / 2 + force*4-256, Screen.height / 2 +force*4 - 256, 512-8*force, 512-8*force), aim );
 	}
 
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+		
+		if (stream.isWriting) {
+			
+			stream.Serialize (ref m_myColor.r);
+			stream.Serialize (ref m_myColor.g);
+			stream.Serialize (ref m_myColor.b);
+		}
+		else {
+			
+			stream.Serialize (ref m_myColor.r);
+			stream.Serialize (ref m_myColor.g);
+			stream.Serialize (ref m_myColor.b);
+		}
+	}
 
 
 
