@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour {
 	GameObject score;
 	public GameObject floor;
 
+
 	void Start () { 
 		//this.gameObject.renderer.material.color = Color.red;
 		explosionSource = audio;

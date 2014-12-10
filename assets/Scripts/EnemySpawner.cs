@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour {
 	GameObject target;
 	public bool canSpawn;
 	Rigidbody enemy;
+	float maxRandRange = 5;
 	// Use this for initialization
 	void Start () {
 
@@ -25,16 +26,20 @@ public class EnemySpawner : MonoBehaviour {
 				if (destructableObjects.Length == 0)
 					canSpawn = false;
 				else{
-					if(Random.Range (0,10) < 6)
+					if(Random.Range (0,10) < 2)
 						if(cityObjects.Length > 0)
 							target = cityObjects [Random.Range (0, cityObjects.Length)];
 						else
 							target = destructableObjects [Random.Range (0, destructableObjects.Length)];
 					else
 						target = destructableObjects [Random.Range (0, destructableObjects.Length)];
-						
-					transform.LookAt (target.transform.position);
-					enemy = (Rigidbody) Network.Instantiate(enemyRocket, transform.position, transform.rotation,0);
+					
+					Transform spawnpoint = transform;
+					spawnpoint.position = new Vector3(Random.Range(-maxRandRange, maxRandRange), 
+				                                 	 30+Random.Range(-maxRandRange, maxRandRange), 
+													 Random.Range(-maxRandRange, maxRandRange));
+					spawnpoint.LookAt (target.transform.position);
+					enemy = (Rigidbody) Network.Instantiate(enemyRocket, spawnpoint.position, spawnpoint.rotation,0);
 				}
 			}
 
