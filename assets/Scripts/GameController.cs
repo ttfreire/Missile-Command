@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public enum GameState {NONE, LOBBY, MATCHMAKING, PLAYING, SPECTATING, GAMEOVER};
 
 public class GameController : MonoBehaviour {
-	GameObject[] cityObjects;
+	GameObject[] destructableObjects;
 	private float nextActionTime = 0f; 
 	public float periodOver;
 	public float periodGame;
@@ -20,14 +20,14 @@ public class GameController : MonoBehaviour {
 	public List<GameObject> playersList;
 	public GameObject turret;
 	public GameObject spectator;
-	public GameObject cityPrefab;
+	public GameObject layoutPrefab;
 	GameObject[] citiesSpawns;
 	public GameObject enemiesSpawner;
 
 	AudioSource themeSource;
 	public int pointsPerKill;
 	public GameState current_gameState = GameState.NONE;
-	int remainingCities;
+	int remainingDestructables;
 
 	PlayerNode newEntry;
 
@@ -89,11 +89,7 @@ public class GameController : MonoBehaviour {
 
 			if (Network.isServer) 
 			{
-				citiesSpawns = GameObject.FindGameObjectsWithTag("CitySpawner");
-				foreach(GameObject spawn in citiesSpawns){
-					Network.Instantiate(cityPrefab, spawn.transform.position, spawn.transform.rotation, 0);	
-				}
-					
+				Network.Instantiate(layoutPrefab, Vector3.zero, Quaternion.identity, 0);	
 				
 				for(int i = 0; i< maxPlayers;i++)
 				{
@@ -162,9 +158,9 @@ public class GameController : MonoBehaviour {
 			break;	
 				
 		case GameState.PLAYING:
-			cityObjects = GameObject.FindGameObjectsWithTag("City");
-			remainingCities = cityObjects.Length;
-			if (remainingCities == 0) {
+			destructableObjects = GameObject.FindGameObjectsWithTag("Destructable");
+			remainingDestructables = destructableObjects.Length;
+			if (remainingDestructables == 0) {
 				nextActionTime += Time.deltaTime;
 				if (nextActionTime > periodGame) { 
 					EnterGameState(GameState.GAMEOVER);
@@ -174,7 +170,7 @@ public class GameController : MonoBehaviour {
 			break;
 
 			case GameState.SPECTATING:
-			if (remainingCities == 0) {
+			if (remainingDestructables == 0) {
 				nextActionTime += Time.deltaTime;
 				if (nextActionTime > periodGame) { 
 					EnterGameState(GameState.GAMEOVER);
@@ -233,7 +229,7 @@ public class GameController : MonoBehaviour {
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
 
 			stream.Serialize (ref numPlayers);
-			stream.Serialize (ref remainingCities);
+			stream.Serialize (ref remainingDestructables);
 			stream.Serialize (ref playingplayers);
 		
 	}
