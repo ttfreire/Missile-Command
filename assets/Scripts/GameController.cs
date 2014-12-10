@@ -224,7 +224,6 @@ public class GameController : MonoBehaviour {
 	[RPC]
 	void informPlayerToClient(NetworkViewID the_player){
 		player = NetworkView.Find(the_player).gameObject;
-		turret.transform.renderer.material.color = Color.magenta;
 		Network.Instantiate (turret, player.transform.position, player.transform.rotation, 0); 		
 		}
 

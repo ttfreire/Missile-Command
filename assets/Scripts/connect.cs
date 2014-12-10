@@ -5,7 +5,7 @@ public class connect : MonoBehaviour {
 	public string connectToIP = "127.0.0.1";
 	public int connectPort = 25001;
 	public string playerName = "Name";
-
+	public Color p_color;
 	// Use this for initialization
 	void Start () {
 	
@@ -27,7 +27,17 @@ public class connect : MonoBehaviour {
 			connectToIP = GUILayout.TextField(connectToIP, GUILayout.MinWidth(100));
 			connectPort = int.Parse(GUILayout.TextField(connectPort.ToString()));
 			playerName = GUILayout.TextField(playerName, GUILayout.MinWidth(100));
-			Debug.Log(playerName);
+			string[] colors = {"Red", "Blue", "Green", "Yellow"};
+			GUILayout.BeginHorizontal();
+			if(GUILayout.Button("Red"))
+				p_color = Color.red;
+			if(GUILayout.Button("Blue"))
+				p_color = Color.blue;
+			if(GUILayout.Button("Green"))
+				p_color = Color.green;
+			if(GUILayout.Button("Yellow"))
+				p_color = Color.yellow;
+			GUILayout.EndHorizontal();
 			GUILayout.BeginVertical();
 			if (GUILayout.Button ("Connect as client"))
 			{
