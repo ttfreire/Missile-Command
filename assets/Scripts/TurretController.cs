@@ -59,7 +59,7 @@ public class TurretController : MonoBehaviour {
 								timeToExplode = (Vector3.Distance(transform.position,finalPos)/(force*speed))*120;
 
 						}
-						if (Input.GetMouseButtonUp (0)) {
+						if (Input.GetMouseButtonUp (0) && ammo > 0) {
 								lineRend.enabled = false;
 								FireRocket (timeToExplode);
 								force = initialForce;

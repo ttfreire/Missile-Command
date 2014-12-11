@@ -26,8 +26,12 @@ public class MissileController : MonoBehaviour {
 
 	void OnCollisionEnter (Collision c){
 				
-		if (c.gameObject.tag == "Enemy"&& networkView.isMine) {
+		if (c.gameObject.tag == "Enemy" && networkView.isMine) {
 			createExplosion(explosion);
+		}
+
+		if ((c.gameObject.tag == "City" || c.gameObject.tag == "Destructable") && networkView.isMine) {
+			Network.Destroy(this.gameObject);
 		}
 
 

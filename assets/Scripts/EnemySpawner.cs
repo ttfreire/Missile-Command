@@ -4,22 +4,25 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 	public Rigidbody enemyRocket;
 	private float nextActionTime = 0.0f; 
-	public float period = 100f;
+	public float period;
 	GameObject[] destructableObjects;
 	GameObject[] cityObjects;
 	GameObject target;
 	public bool canSpawn;
 	Rigidbody enemy;
 	float maxRandRange = 5;
+	float counter;
 	// Use this for initialization
 	void Start () {
-
+		nextActionTime = 0.0f;
+		counter = 0.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		counter += Time.deltaTime;
 		if(Network.isServer)
-			if (Time.time > nextActionTime && canSpawn ) { 
+			if (counter > nextActionTime && canSpawn ) { 
 				nextActionTime += period;
 				destructableObjects = GameObject.FindGameObjectsWithTag("Destructable");
 				cityObjects = GameObject.FindGameObjectsWithTag("City");
@@ -35,11 +38,11 @@ public class EnemySpawner : MonoBehaviour {
 						target = destructableObjects [Random.Range (0, destructableObjects.Length)];
 					
 					Transform spawnpoint = transform;
-					spawnpoint.position = new Vector3(Random.Range(-maxRandRange, maxRandRange), 
-				                                 	 30+Random.Range(-maxRandRange, maxRandRange), 
-													 Random.Range(-maxRandRange, maxRandRange));
-					spawnpoint.LookAt (target.transform.position);
-					enemy = (Rigidbody) Network.Instantiate(enemyRocket, spawnpoint.position, spawnpoint.rotation,0);
+					enemy = (Rigidbody) Network.Instantiate(enemyRocket, new Vector3(Random.Range(-maxRandRange, maxRandRange), 
+				                                                                 30+Random.Range(-maxRandRange, maxRandRange), 
+				                                                                 Random.Range(-maxRandRange, maxRandRange)), spawnpoint.rotation,0);
+					enemy.transform.parent = this.gameObject.transform;
+					enemy.transform.LookAt (target.transform.position);
 				}
 			}
 

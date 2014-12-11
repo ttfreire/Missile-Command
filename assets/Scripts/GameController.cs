@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
 	public GameState current_gameState = GameState.NONE;
 	int remainingDestructables;
 
+	GameObject theLayoutgameobject;
 	PlayerNode newEntry;
 
 	GameObject stateGUI;
@@ -76,7 +77,7 @@ public class GameController : MonoBehaviour {
 				Application.LoadLevel ("gameScene");
 				if(Network.isServer)
 					numPlayers = 0;
-				if(networkView.isMine)
+				if(Network.isClient && networkView.isMine)
 					GameObject.FindObjectOfType<chat>().enabled = true;
 				break;
 			
@@ -87,6 +88,10 @@ public class GameController : MonoBehaviour {
 			{
 				playersList.Add(GameObject.Find("Player1"));
 				playersList.Add(GameObject.Find("Player2"));
+				GameObject[] missiles = GameObject.FindGameObjectsWithTag("Enemy");
+				if(missiles!= null && missiles.Length > 0)
+					foreach (GameObject missile in missiles)
+						Network.Destroy(missile.gameObject);
 				
 			}else
 				//if(networkView.isMine)
@@ -101,19 +106,17 @@ public class GameController : MonoBehaviour {
 
 			if (Network.isServer) 
 			{
-				Network.Instantiate(layoutPrefab, Vector3.zero, Quaternion.identity, 0);	
+				theLayoutgameobject = (GameObject) Network.Instantiate(layoutPrefab, Vector3.zero, Quaternion.identity, 0);	
 				
 				for(int i = 0; i< maxPlayers;i++)
 				{
 					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
 					
 					playersList.RemoveAt(0);
-					
+
 				}
-				Transform enemy_spawn_pos = GameObject.FindGameObjectWithTag("Respawn").transform;  
-				Network.Instantiate(enemiesSpawner, enemy_spawn_pos.position, enemy_spawn_pos.rotation, 0);	
-				enemySpawner = FindObjectOfType<EnemySpawner>();
-				enemySpawner.GetComponent<EnemySpawner>().canSpawn = true;
+				GameObject spawner = (GameObject) Network.Instantiate(enemiesSpawner, transform.position, transform.rotation, 0);
+				spawner.GetComponent<EnemySpawner>().canSpawn = true;
 			}
 			else
 			{
@@ -143,9 +146,11 @@ public class GameController : MonoBehaviour {
 			//DontDestroyOnLoad (this.gameObject);
 			if(Network.isServer)
 			{
-				GameObject[] missiles = GameObject.FindGameObjectsWithTag("Enemy");
-				foreach (GameObject missile in missiles)
-					Network.Destroy(missile.gameObject);
+				//GameObject[] missiles = GameObject.FindGameObjectsWithTag("Enemy");
+				//foreach (GameObject missile in missiles)
+				//	Network.Destroy(missile.gameObject);
+				theLayoutgameobject = GameObject.Find("Layout (Clone)");
+				Network.Destroy(theLayoutgameobject);
 				GameObject[] destructions = GameObject.FindGameObjectsWithTag("Destruction");
 				foreach (GameObject destruction in destructions)
 					Network.Destroy(destruction);
@@ -227,7 +232,7 @@ public class GameController : MonoBehaviour {
 				
 			case GameState.PLAYING:
 			if(Network.isServer)
-			enemySpawner.GetComponent<EnemySpawner>().canSpawn = false;;
+				Network.Destroy(GameObject.FindObjectOfType<EnemySpawner>().gameObject);
 				break;
 				
 			case GameState.GAMEOVER:
