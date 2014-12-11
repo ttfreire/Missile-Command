@@ -23,9 +23,11 @@ public class EnemyController : MonoBehaviour {
 
 	void OnCollisionEnter (Collision c){
 		if ((c.gameObject.tag == "City" || c.gameObject.tag == "Destructable") && Network.isServer) {
+			if(c.gameObject.GetComponent<BigPyramidController>()==null)
+				Network.Destroy(c.gameObject);
 			GameObject explosionObject = (GameObject) Network.Instantiate(destruction, transform.position, Quaternion.identity,0);
 			//AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
-			Network.Destroy(c.gameObject);
+
 			Network.Destroy (this.gameObject);
 
 		}

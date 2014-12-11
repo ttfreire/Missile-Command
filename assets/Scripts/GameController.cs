@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour {
 	GameObject stateGUI;
 	bool created = false;
 	public string sayMyName;
+	public GameObject theBigPyramid;
+	public GameObject theBigPyramidObject;
 
 	public List<PlayerNode> playerList = new List<PlayerNode>();
 	public class PlayerNode {
@@ -108,7 +110,8 @@ public class GameController : MonoBehaviour {
 			if (Network.isServer) 
 			{
 				theLayoutgameobject = (GameObject) Network.Instantiate(layoutPrefab, Vector3.zero, Quaternion.identity, 0);	
-				
+				theBigPyramidObject = (GameObject) Network.Instantiate(theBigPyramid, Vector3.zero, Quaternion.identity, 0);
+				theBigPyramidObject.transform.parent = theLayoutgameobject.transform;
 				for(int i = 0; i< maxPlayers;i++)
 				{
 					networkView.RPC("informPlayerToClient", playerList[i].networkPlayer, playersList[0].networkView.viewID);
