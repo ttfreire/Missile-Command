@@ -64,7 +64,8 @@ public class GameController : MonoBehaviour {
 			case GameState.LOBBY:
 				Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
-
+				if(Network.isServer)
+					numPlayers = 0;
 			
 				break;
 			

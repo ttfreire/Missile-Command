@@ -92,10 +92,6 @@ public class connect : MonoBehaviour {
 			
 	}
 	
-	public void OnDisconnectedFromServer(NetworkDisconnection info) {
-		
-	}
-	
 	public void OnFailedToConnect( NetworkConnectionError error){
 		
 	}
@@ -131,4 +127,13 @@ public class connect : MonoBehaviour {
 	public void OnNetworkInstantiate (NetworkMessageInfo info) {
 		
 	}
+
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		if (Network.isServer)
+						GameObject.Find ("Game").GetComponent<GameController> ().numPlayers = 0;
+				else
+						GameObject.FindObjectOfType<GameController> ().current_gameState = GameState.GAMEOVER;
+
+	}
+
 }
