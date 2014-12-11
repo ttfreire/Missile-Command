@@ -23,8 +23,7 @@ public class TurretController : MonoBehaviour {
 			m_myColor = GameObject.FindObjectOfType<connect> ().p_color;
 			force = initialForce;
 
-			Screen.showCursor = false;
-			Screen.lockCursor = true;
+
 
 			lineRend = GetComponentInChildren<LineRenderer> ();
 			missileSource = audio;
@@ -46,7 +45,7 @@ public class TurretController : MonoBehaviour {
 
 
 			myCamera.fieldOfView = (float)(480 / force);
-						if (Input.GetMouseButton (0)) {
+						if (Input.GetMouseButton (0) && ammo > 0) {
 								lineRend.enabled = true;
 								force += 0.2f;
 								force = Mathf.Clamp (force, 0, maxForce);
@@ -64,6 +63,7 @@ public class TurretController : MonoBehaviour {
 								FireRocket (timeToExplode);
 								force = initialForce;
 						}
+						
 				}
 		if(!networkView.isMine){
 			GetComponentInChildren<Camera>().enabled = false;

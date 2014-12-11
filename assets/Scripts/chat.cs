@@ -16,13 +16,16 @@ public class chat : MonoBehaviour {
 	public float lastUnfocusTime =0;
 	public Rect window ;
 	public bool ready;
+	GameController controller;
 	// Use this for initialization
 	void Start () {
 		ready = false;
+		controller = GameObject.FindObjectOfType<GameController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		playerName = controller.sayMyName;
 		showChat = true;
 	}
 	
@@ -58,6 +61,7 @@ public class chat : MonoBehaviour {
 		if(playerName==null || playerName==""){
 			playerName = "RandomName"+Random.Range(1,999);
 		}	
+		controller.sayMyName = playerName;
 		ShowChatWindow();
 		networkView.RPC ("TellServerOurName", RPCMode.Server, playerName);
 		// //We could have also announced ourselves:

@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
 
 	GameObject stateGUI;
 	bool created = false;
+	public string sayMyName;
 
 	public List<PlayerNode> playerList = new List<PlayerNode>();
 	public class PlayerNode {
@@ -167,8 +168,17 @@ public class GameController : MonoBehaviour {
 			case GameState.LOBBY:
 			if(Network.isServer)
 					EnterGameState(GameState.MATCHMAKING);
-			else if (GameObject.FindObjectOfType<chat>().ready)
-				EnterGameState(GameState.MATCHMAKING);
+			else{
+				Screen.showCursor = true;
+				Screen.lockCursor = false;
+				if (GameObject.FindObjectOfType<chat>().ready)
+				{
+					sayMyName = GameObject.Find ("Network").GetComponent<connect> ().playerName;
+					Screen.showCursor = false;
+					Screen.lockCursor = true;
+					EnterGameState(GameState.MATCHMAKING);
+				}
+			}
 				break;
 				
 			case GameState.MATCHMAKING:
