@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class EnemyController : MonoBehaviour {
-	public Rigidbody destruction;
+	public GameObject destruction;
 	public float speed;
 	AudioSource explosionSource;
 	GameObject player;
@@ -23,10 +23,11 @@ public class EnemyController : MonoBehaviour {
 
 	void OnCollisionEnter (Collision c){
 		if ((c.gameObject.tag == "City" || c.gameObject.tag == "Destructable") && Network.isServer) {
-			Rigidbody explosionObject = (Rigidbody) Network.Instantiate(destruction, transform.position, Quaternion.identity,0);
+			GameObject explosionObject = (GameObject) Network.Instantiate(destruction, transform.position, Quaternion.identity,0);
 			AudioSource.PlayClipAtPoint(explosionSource.clip,player.transform.position); 
 			Network.Destroy(c.gameObject);
 			Network.Destroy (this.gameObject);
+
 		}
 
 		if (c.gameObject.name == "Floor" && Network.isServer) {

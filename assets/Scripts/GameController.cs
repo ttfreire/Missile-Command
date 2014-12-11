@@ -71,12 +71,13 @@ public class GameController : MonoBehaviour {
 
 		switch (current_gameState) {
 			case GameState.LOBBY:
+			playingplayers = 0;
 				//Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
 				if(Network.isServer)
 					numPlayers = 0;
-				
-				GameObject.FindObjectOfType<chat>().enabled = true;
+				if(networkView.isMine)
+					GameObject.FindObjectOfType<chat>().enabled = true;
 				break;
 			
 			case GameState.MATCHMAKING:
@@ -145,6 +146,9 @@ public class GameController : MonoBehaviour {
 				GameObject[] missiles = GameObject.FindGameObjectsWithTag("Enemy");
 				foreach (GameObject missile in missiles)
 					Network.Destroy(missile.gameObject);
+				GameObject[] destructions = GameObject.FindGameObjectsWithTag("Destruction");
+				foreach (GameObject destruction in destructions)
+					Network.Destroy(destruction);
 			}
 			Application.LoadLevel("gameOver");
 
@@ -223,7 +227,7 @@ public class GameController : MonoBehaviour {
 				
 			case GameState.PLAYING:
 			if(Network.isServer)
-				enemySpawner.GetComponent<EnemySpawner>().canSpawn = false;;
+			enemySpawner.GetComponent<EnemySpawner>().canSpawn = false;;
 				break;
 				
 			case GameState.GAMEOVER:

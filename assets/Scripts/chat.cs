@@ -23,7 +23,7 @@ public class chat : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		showChat = true;
 	}
 	
 	public ArrayList playerList = new ArrayList();
@@ -45,6 +45,10 @@ public class chat : MonoBehaviour {
 
 		
 	}
+
+	public void start(){
+		ShowChatWindow ();
+		}
 	
 	
 	//Client public void
