@@ -132,7 +132,7 @@ public class connect : MonoBehaviour {
 		if (Network.isServer)
 						GameObject.Find ("Game").GetComponent<GameController> ().numPlayers = 0;
 				else
-						GameObject.FindObjectOfType<GameController> ().current_gameState = GameState.GAMEOVER;
+					GameObject.FindObjectOfType<GameController> ().EnterGameState(GameState.LOBBY);
 
 	}
 

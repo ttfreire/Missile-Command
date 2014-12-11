@@ -15,10 +15,10 @@ public class chat : MonoBehaviour {
 	public string playerName;
 	public float lastUnfocusTime =0;
 	public Rect window ;
-	public bool ready = false;
+	public bool ready;
 	// Use this for initialization
 	void Start () {
-		
+		ready = false;
 	}
 	
 	// Update is called once per frame

@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour {
 	PlayerNode newEntry;
 
 	GameObject stateGUI;
+	bool created = false;
 
 	public List<PlayerNode> playerList = new List<PlayerNode>();
 	public class PlayerNode {
@@ -39,9 +40,17 @@ public class GameController : MonoBehaviour {
 		public NetworkPlayer networkPlayer;
 	}
 
+
 	void Start () {
 		themeSource = audio;
-		DontDestroyOnLoad (this);
+			if (!created) 
+			{ 
+				DontDestroyOnLoad (GameObject.Find ("Game"));
+				created = true; 
+			} else 
+			{ 
+				Destroy(this.gameObject);
+			}
 		playersList = new List<GameObject>();
 		EnterGameState(GameState.LOBBY);
 		citiesSpawns = null;
@@ -62,11 +71,12 @@ public class GameController : MonoBehaviour {
 
 		switch (current_gameState) {
 			case GameState.LOBBY:
-				Network.isMessageQueueRunning = false;
+				//Network.isMessageQueueRunning = false;
 				Application.LoadLevel ("gameScene");
 				if(Network.isServer)
 					numPlayers = 0;
-			
+				
+				GameObject.FindObjectOfType<chat>().enabled = true;
 				break;
 			
 			case GameState.MATCHMAKING:
@@ -127,10 +137,18 @@ public class GameController : MonoBehaviour {
 			Network.Instantiate(spectator, Vector3.zero, Quaternion.identity, 0);
 			break;
 			
-			case GameState.GAMEOVER:
-				nextActionTime = 0f;
-				Application.LoadLevel("gameOver");
-				break;
+		case GameState.GAMEOVER:
+			nextActionTime = 0f;
+			//DontDestroyOnLoad (this.gameObject);
+			if(Network.isServer)
+			{
+				GameObject[] missiles = GameObject.FindGameObjectsWithTag("Enemy");
+				foreach (GameObject missile in missiles)
+					Network.Destroy(missile.gameObject);
+			}
+			Application.LoadLevel("gameOver");
+
+			break;
 		}
 	}
 
@@ -148,7 +166,7 @@ public class GameController : MonoBehaviour {
 
 			nextActionTime += Time.deltaTime;
 			if (nextActionTime > periodGame) { 
-				nextActionTime = 0;
+				nextActionTime = 0f;
 				if(playingplayers == maxPlayers)
 					EnterGameState(GameState.PLAYING);
 				else if(playingplayers >= maxPlayers)
@@ -164,6 +182,7 @@ public class GameController : MonoBehaviour {
 			if (remainingDestructables == 0) {
 				nextActionTime += Time.deltaTime;
 				if (nextActionTime > periodGame) { 
+					nextActionTime = 0f;
 					EnterGameState(GameState.GAMEOVER);
 				}
 			}
@@ -181,9 +200,10 @@ public class GameController : MonoBehaviour {
 			break;
 			
 		case GameState.GAMEOVER:
-				if (nextActionTime > periodOver) { 
-					Application.LoadLevel ("gameScene");
-					EnterGameState(GameState.LOBBY);
+			if (nextActionTime > periodOver) { 
+				nextActionTime = 0f;
+				EnterGameState(GameState.LOBBY);
+
 				}
 				nextActionTime += Time.deltaTime;
 				break;
@@ -202,7 +222,8 @@ public class GameController : MonoBehaviour {
 				break;	
 				
 			case GameState.PLAYING:
-				
+			if(Network.isServer)
+				enemySpawner.GetComponent<EnemySpawner>().canSpawn = false;;
 				break;
 				
 			case GameState.GAMEOVER:
@@ -246,6 +267,7 @@ public class GameController : MonoBehaviour {
 	[RPC]
 	public void addPlayingPlayer(){
 		playingplayers++;
+
 		Debug.Log ("Playing Players: " + playingplayers);
 	}
 	
